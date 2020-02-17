@@ -138,9 +138,9 @@
         </template>
         <froala id="edit" :tag="'textarea'"   :config="config" v-model="text"></froala>
 
-        <button @click="apartshow" class="btn btn-sm btn-dark m-1">{{ $t('Aparat')}} | <span class="icofont-ui-movie"></span>  </button>
-        <button @click="codeshow"  class="btn  btn-sm btn-dark m-1">{{ $t('embedcode')}} | <span class="icofont-code"></span> </button>
-        <button @click="show" class="btn btn-dark btn-sm m-1">{{ $t('filemanager')}} | <span class="icofont-folder-open"></span> </button>
+        <a @click="apartshow" class="btn text-white btn-sm btn-dark m-1">{{ $t('Aparat')}} | <span class="icofont-ui-movie"></span>  </a>
+        <a @click="codeshow"  class="btn  text-white btn-sm btn-dark m-1">{{ $t('embedcode')}} | <span class="icofont-code"></span> </a>
+        <a @click="show" class="btn text-white btn-dark btn-sm m-1">{{ $t('filemanager')}} | <span class="icofont-folder-open"></span> </a>
         <hr>
     </div>
 

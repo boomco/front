@@ -4,13 +4,13 @@
             <h5 v-text="$t('articlegroup')">  </h5>
             <hr>
             <a @click="additem" :title="$t('addarticle')" class="btn btn-success   shadow btn-circle btn-xl  mr-3 text-white "><span class="icofont-plus"></span></a>
-            <a @click="listitem"   :title="$t('addarticlegroup')" class="btn btn-danger  shadow btn-circle btn-xl  mr-3 text-white "><span class="icofont-list"></span></a>
+            <a @click="loadarticle"   :title="$t('addarticlegroup')" class="btn btn-danger  shadow btn-circle btn-xl  mr-3 text-white "><span class="icofont-list"></span></a>
             <hr>
             <div v-if="method=='list'">
                 <div class="text-right" dir="rtl">
                     <div class="col-sm-6 col-xs-12 right pb-3" >
                         <label v-text="$t('Group')"></label>
-                        <v-select class="col-sm-12 col-xs-12" dir="rtl" v-model="groupselect" :options="list" label="name"></v-select>
+                        <v-select  @input="changeselect"   class="col-sm-12 col-xs-12" dir="rtl" v-model="groupselect" :options="list" label="name"></v-select>
 
                     </div>
 
@@ -23,7 +23,6 @@
                         <th scope="col" v-text="$t('name')"></th>
                         <th scope="col"  v-text="$t('url')"></th>
                         <th  class="text-center" scope="col" v-text="$t('edit')"></th>
-                        <th  class="text-center" scope="col" v-text="$t('MangeArticle')"></th>
                         <th class="text-center" scope="col"  v-text="$t('del')"></th>
                     </tr>
                     </thead>
@@ -33,13 +32,12 @@
                         <td v-text="item.name"></td>
                         <td v-text="item.url"></td>
                         <td @click="edit(index)" class="text-center"><span class="icofont icofont-edit-alt"></span></td>
-                        <td  class="text-center"><a :href="'#articlelist#'+item.id" class="icofont icofont-ui-folder"></a></td>
                         <td class="text-center"><span class="icofont icofont-delete-alt"></span></td>
                     </tr>
                     </tbody>
                 </table>
                 <paginate
-                        :page-count="articlelist.last_page"
+                        :page-count="articlelist.meta.from"
                         :page-range="3"
                         :margin-pages="2"
                         :click-handler="clickCallback"
@@ -67,7 +65,7 @@
 
                             <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                             <template v-if="blog.image=='1'">
-                                <img :src="$storage+'media/BlogGroup/'+blog.id+'/thump.png'" class="img-thumbnail w-50">
+                                <img :src="$storage+'media/Articles/'+blog.id+'/thump.png'" class="img-thumbnail w-50">
                             </template>
 
                         </div>
@@ -76,7 +74,7 @@
                     <template v-if="blog.id">
                         <tisseditor  :text="blog.text"
                                      v-on:myevent="doSomething"
-                                     :mode="'BlogGroup'"></tisseditor>
+                                     :mode="'Blog'"></tisseditor>
                         <label v-text="$t('keywords')"></label>
                         <textarea  class="form-control col-xs-12 col-sm-12 " v-model="blog.keywords"></textarea>
                         <label v-text="$t('Description')"></label>
@@ -162,7 +160,7 @@
             taggenerator(){
                 let b=[];
                 this.blog.totags.forEach(function(item){
-                   b.push(item.name);
+                    b.push(item.name);
                 });
                 return b;
             }
@@ -175,15 +173,15 @@
                 this.tags=[];
                 this.blog={
                     id:null,
-                        name:null,
-                        image:null,
-                        publish:1,
-                        text:null,
-                        url:null,
-                        keywords:null,
-                        description:null,
-                        tag:null,
-                        ordered:null
+                    name:null,
+                    image:null,
+                    publish:1,
+                    text:null,
+                    url:null,
+                    keywords:null,
+                    description:null,
+                    tag:null,
+                    ordered:null
                 };
             },
             doSomething(e){
@@ -201,8 +199,9 @@
                 };
             },
             edit(id){
-              this.blog=this.list[id];
-              this.tags=this.taggenerator;
+                console.log(this.articlelist.data[0]);
+                this.blog=this.articlelist.data[id];
+                this.tags=this.taggenerator;
                 this.method='additem';
             },
             saveform(){
@@ -231,12 +230,12 @@
                             }
                         }
                     ).then(function(){
-                      //  that.listitem();
+                        //  that.listitem();
                     })
                         .catch((error) => {
                             that.error = error.response.data.errors;
 
-                    });
+                        });
                 }else{
                     this.$axios.post(this.$url+'user/BlogArticleupdate/'+this.blog.id,
                         formData,
@@ -246,12 +245,12 @@
                                 Authorization:localStorage.token
                             }
                         }
-                    ).then(function(){
-                       // that.listitem();
+                    ).then(function(res){
+                            console.log('FUCK DAY');
+                        that.$swal.fire(that.$t('Saved'));
                     })
                         .catch((error) => {
                             that.error = error.response.data.errors;
-
                         });
                 }
 
@@ -269,8 +268,9 @@
                     {headers:{Authorization:localStorage.token}}
                 ).then(function(res){
                     that.list=res.data.data;
-                   that.loadgroup();
+                    that.loadgroup();
                     that.loadarticle();
+
 
                 })
 
@@ -279,6 +279,7 @@
                 let that=this;
 
                 this.list.map(function (el) {
+
                     if(el.id==window.location.hash.substring(1).split('#')[1]){
                         that.groupselect=el;
                     }
@@ -298,20 +299,27 @@
                 this.loadarticle(pageNum);
 
             },
+            changeselect(page){
+
+                this.loadarticle(1);
+            },
             loadarticle(page=1){
+
+                this.method='list';
+
                 let that=this;
                 let group='';
 
-                if(this.groupselect.length==0){
+                if(this.groupselect.length!=0){
                     group=this.groupselect.id;
                 }
-                alert(group);
                 this.$axios.get(this.$url+'user/BlogArticle',
                     {
                         params: {
-                            page: page,group: group
-                        }, 
-                         headers:{Authorization:localStorage.token}}
+                            page: page,
+                            group: group
+                        },
+                        headers:{Authorization:localStorage.token}}
                 ).then(function(res){
                     that.articlelist=res.data;
 
@@ -324,7 +332,8 @@
         mounted() {
             this.listitem();
             this.loadtag();
-            this.loadarticle();
+
+            this.loadarticle(window.location.hash.substring(1).split('#')[1]);
 
 
         }

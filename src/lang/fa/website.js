@@ -115,5 +115,6 @@ module.exports = {
     keywords : 'کلمات کلیدی',
     Description : 'توضبحات',
     MangeArticle : 'مدیریت مطالب',
+    Saved : 'ذخیره سازی انجام شد',
     The_groups_field_is_required : 'گروه را انتخاب نمایید',
 }
