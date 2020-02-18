@@ -89,7 +89,8 @@ const router=new  VueRouter({
             path:'/logout',
             name:'logout',
             component:logout
-        }
+        },
+
     ]
 })
 

@@ -7,14 +7,28 @@
             <a @click="loadarticle"   :title="$t('addarticlegroup')" class="btn btn-danger  shadow btn-circle btn-xl  mr-3 text-white "><span class="icofont-list"></span></a>
             <hr>
             <div v-if="method=='list'">
-                <div class="text-right" dir="rtl">
+                <div class="text-right row " dir="rtl">
                     <div class="col-sm-6 col-xs-12 right pb-3" >
                         <label v-text="$t('Group')"></label>
                         <v-select  @input="changeselect"   class="col-sm-12 col-xs-12" dir="rtl" v-model="groupselect" :options="list" label="name"></v-select>
 
                     </div>
+                    <div class="col-sm-4 col-xs-12 right pb-3" >
+                        <label v-text="$t('Search')"></label>
+                        <input type="search" v-model="search" class="form-control">
 
-                </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-5">
+                        <label ></label>
+                        <div class="mt-2">
+                            <input @click="loadarticle()" type="button" class="btn btn-dark w-100" :value="$t('filter')">
+
+                        </div>
+                    </div>
+
+
+                    </div>
+
 
                 <table class="table table-striped" dir="rtl">
                     <thead>
@@ -32,7 +46,7 @@
                         <td v-text="item.name"></td>
                         <td v-text="item.url"></td>
                         <td @click="edit(index)" class="text-center"><span class="icofont icofont-edit-alt"></span></td>
-                        <td class="text-center"><span class="icofont icofont-delete-alt"></span></td>
+                        <td @click="remove(item.id)" class="text-center"><span class="icofont icofont-delete-alt"></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -123,7 +137,7 @@
                 group:null,
                 file:'',
                 groupselect:[],
-
+                search:'',
                 method:'list',
                 blog:{
                     id:null,
@@ -303,6 +317,33 @@
 
                 this.loadarticle(1);
             },
+            remove(id){
+                let that=this;
+                this.$swal.fire({
+                    title: that.$t('Areyousure'),
+                    text: that.$t('Youwontbeabletorevertthis'),
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: that.$t('cancel'),
+                    confirmButtonText: that.$t('Yesdeleteit')
+                }).then((result) => {
+                    if (result.value) {
+                        that.$axios.delete(this.$url + 'user/BlogArticle/' + id,
+                            {
+                                headers:
+                                    {
+                                        Authorization: localStorage.token
+                                    }
+                            })
+                            .then(function (res) {
+                                that.loadarticle();
+
+                            });
+                    }
+                });
+            },
             loadarticle(page=1){
 
                 this.method='list';
@@ -317,7 +358,8 @@
                     {
                         params: {
                             page: page,
-                            group: group
+                            group: group,
+                            search: that.search
                         },
                         headers:{Authorization:localStorage.token}}
                 ).then(function(res){

@@ -114,7 +114,12 @@ module.exports = {
     Group : 'گروه',
     keywords : 'کلمات کلیدی',
     Description : 'توضبحات',
+    hashtag : 'برچسب ها',
     MangeArticle : 'مدیریت مطالب',
+    contactus : 'تماس با ما ',
+    hashtagmanager : 'مدیریت تگ ها',
+    Search : 'جستجو',
+    filter : 'فیلتر',
     Saved : 'ذخیره سازی انجام شد',
     The_groups_field_is_required : 'گروه را انتخاب نمایید',
 }

@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm-8 text-right pt-3 text-dark"  dir="rtl" style="margin-right: -20px;">
                 <span class="icofont-ui-user p-4"></span>
-                    <span v-text="user.name"></span><span v-if="user.lastname" v-text="user.lastname"></span> {{ $t('wellcome')}}
+                    <span v-text="user.name"></span> <span v-if="user.lastname" v-text="user.lastname"></span> {{ $t('wellcome')}}
 
                 </div>
                 <div class="col-sm-2 ">
@@ -50,6 +50,10 @@
     import articlegroup from "./blog/articlegroup";
     import articlelist from "./blog/articlelist";
     import editarticle from "./blog/editarticle";
+    import hashtag from "./tags/hashtag";
+    import setting from "./setting/setting";
+    import contactus from "./setting/contactus";
+
     export default {
             name: "Dashboard",
         components: {
@@ -61,7 +65,10 @@
             dashborad,
             articlegroup,
             articlelist,
-            editarticle
+            editarticle,
+            hashtag,
+            setting,
+            contactus
         },
         data(){
             return{
@@ -89,13 +96,13 @@
                             },
                             {
                                 icon: 'icofont-listing-box',
-                                href: '#textlist',
+                                href: '#articlelist',
                                 title:  this.$t('textlist')
                             },
                             {
-                                icon: 'icofont-multimedia ',
-                                href: '#editarticle',
-                                title: this.$t('newarticle')
+                                icon: 'icofont-label ',
+                                href: '#hashtag',
+                                title: this.$t('hashtag')
                             }
                         ]
                     },
@@ -113,6 +120,11 @@
                                 icon: 'icofont-page',
                                 href: '#firstpage',
                                 title: this.$t('firstpage')
+                            },
+                            {
+                                icon: 'icofont-phone',
+                                href: '#contactus',
+                                title: this.$t('contactus')
                             },
                             {
                                 icon: 'icofont-info-circle',
