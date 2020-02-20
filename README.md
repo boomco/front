@@ -19,7 +19,7 @@
 |nodejs | https://nodejs.org |
 | Vue Select | https://vue-select.org |
 | BootStrap 4 | https://getbootstrap.com |
-| icofont | [https://icofont.com/][PlDb] |
+| icofont | https://icofont.com |
 | sweetalert2 | https://sweetalert2.github.io |
 |froala-editor | https://froala.com|
 # installation
