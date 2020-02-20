@@ -17,7 +17,6 @@
         },
         methods:{
             loadlist(){
-                this.$axios.get('')
             }
         },
         mounted() {

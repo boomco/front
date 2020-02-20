@@ -120,8 +120,11 @@ module.exports = {
     supportphone : 'شماره پیشتیبانی ',
     otherphone : 'شماره های دیگر ',
     hashtagmanager : 'مدیریت تگ ها',
+    The_urlname_field_is_required : 'url اجبار می باشد',
+    The_urlname_has_already_been_taken : 'url تکراری می باشد',
     Search : 'جستجو',
     filter : 'فیلتر',
     Saved : 'ذخیره سازی انجام شد',
     The_groups_field_is_required : 'گروه را انتخاب نمایید',
+    imagemanager : 'مدیریت تصاویر',
 }
