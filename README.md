@@ -14,14 +14,14 @@
 ## most use sorurce in Front  
 | SourceName | URL |
 | ------ | ------ |
-|VUEJS | [https://vuejs.org/][PlDb]  |
-|Axios | [https://github.com/axios/axios][PlDb] |
-|nodejs | [https://nodejs.org/][PlDb] |
-| Vue Select | [https://vue-select.org/][PlDb] |
-| BootStrap 4 | [https://getbootstrap.com/][PlDb] |
+|VUEJS | https://vuejs.org  |
+|Axios | https://github.com/axios/axios |
+|nodejs | https://nodejs.org |
+| Vue Select | https://vue-select.org |
+| BootStrap 4 | https://getbootstrap.com |
 | icofont | [https://icofont.com/][PlDb] |
-| sweetalert2 | [https://sweetalert2.github.io/][PlDb] |
-|froala-editor | [https://froala.com/][PlDb] |
+| sweetalert2 | https://sweetalert2.github.io |
+|froala-editor | https://froala.com|
 # installation
 ~~~
 $ npm install
