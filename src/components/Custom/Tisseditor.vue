@@ -192,7 +192,6 @@
                         });
 
                     }
-                        console.log(myobject);
                     return myobject;
                 }
 

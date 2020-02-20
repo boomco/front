@@ -260,7 +260,6 @@
                             }
                         }
                     ).then(function(res){
-                            console.log('FUCK DAY');
                         that.$swal.fire(that.$t('Saved'));
                     })
                         .catch((error) => {

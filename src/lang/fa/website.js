@@ -117,6 +117,8 @@ module.exports = {
     hashtag : 'برچسب ها',
     MangeArticle : 'مدیریت مطالب',
     contactus : 'تماس با ما ',
+    supportphone : 'شماره پیشتیبانی ',
+    otherphone : 'شماره های دیگر ',
     hashtagmanager : 'مدیریت تگ ها',
     Search : 'جستجو',
     filter : 'فیلتر',

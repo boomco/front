@@ -53,6 +53,7 @@
     import hashtag from "./tags/hashtag";
     import setting from "./setting/setting";
     import contactus from "./setting/contactus";
+    import gallery from "./gallery/gallerygroup";
 
     export default {
             name: "Dashboard",
@@ -68,6 +69,7 @@
             editarticle,
             hashtag,
             setting,
+            gallery,
             contactus
         },
         data(){
