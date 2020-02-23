@@ -71,7 +71,6 @@
                             <label v-text="$t('url')"></label>
                             <input  class="form-control col-xs-12 col-sm-12 " v-model="blog.url">
                             <label v-text="$t('Group')"></label>
-                            <v-select class="col-sm-12 col-xs-12" dir="rtl" v-model="groupselect" :options="list" label="name"></v-select>
 
 
                         </div>

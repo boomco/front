@@ -1,8 +1,13 @@
 <template>
     <div>
         <vue-dropzone  @vdropzone-complete="showitem"  ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
-        <img v-if="file!=null" class="img-thumbnail w-100" :src="$storage+'media/'+this.mode+'/'+this.id+'/'+this.file" >
+        <template v-if="showthump==true">
+            <img v-if="file!=null" class="img-thumbnail w-100" :src="$storage+'media/'+this.mode+'/'+this.id+'/thump/'+this.file" >
+
+        </template>
+        <template v-if="deletefile==true">
         <span @click="deleteitem" v-if="file!=null" class="icofont-ui-delete tiss-cursur"></span>
+        </template>
     </div>
 
 </template>
@@ -32,6 +37,19 @@
             file:{
                 type:String,
                 default:null
+            },
+            showthump:{
+                type:Boolean,
+                default:true
+            },
+            deletefile:{
+                type:Boolean,
+                default:true
+            },
+        },
+        watch: {
+            file:function (val) {
+                this.$emit('filename', val);
             }
         },
         computed:{
@@ -69,6 +87,7 @@
 
             },
             deleteitem() {
+                let that=this;
                 this.$axios.delete(this.$url + 'user/fileupload/' + this.file,
                     {
                      data:{
@@ -83,7 +102,7 @@
 
                 })
                     .then(function (response) {
-
+                        that.file=null;
                     });
 
             }

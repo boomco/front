@@ -13,13 +13,15 @@
                         <div class="card-header">{{ item.name }}</div>
 
                         <div class="card-body">
-                            <img class="card-img-top" :src="$storage+'media/Other/noimage.png'" :alt="item.name">
+
+                            <img v-if="item.image==null" class="card-img-top" :src="$storage+'media/Other/noimage.png'" :alt="item.name">
+                            <img v-if="item.image!=null" class="card-img-top" :src="$storage+'media/gallerygroup/'+item.id+'/thump/'+item.image" :alt="item.name">
 
                         </div>
                         <div class="card-footer text-muted">
-                            <a  class="btn btn-primary" :title="$t('imagemanager')"><span class="icofont-ui-image text-white"></span></a>
+                            <a :href="'#gallerydetail#'+item.id"  class="btn btn-primary" :title="$t('imagemanager')"><span class="icofont-ui-image text-white"></span></a>
                             <a @click="edit(index)" class="btn btn-secondary ml-4" :title="$t('edit')"><span class="icofont-ui-edit text-white"></span></a>
-                            <a  class="btn btn-danger ml-4" :title="$t('edit')"><span class="icofont-ui-delete text-white"></span></a>
+                            <a   class="btn btn-danger ml-4" :title="$t('edit')"><span class="icofont-ui-delete text-white"></span></a>
 
                         </div>
                     </div>
@@ -46,11 +48,19 @@
                     <template v-if="group.id!=null">
                         <div class="row">
                             <div class="col-xs-12 col-sm-3">
-                        <file-uploader></file-uploader>
+                        <file-uploader
+                                mode="gallerygroup"
+                                v-on:filename="filenames"
+                                :id='group.id'
+                                name="thump"
+                                :file="group.image"
+                        ></file-uploader>
                             </div>
                             <div class="col-xs-12 col-sm-9">
-                                <tisseditor  :text="group.text"
-                                             v-on:myevent="doSomething"
+                                <tisseditor
+                                        :height="500"
+                                        :text="group.text"
+                                         v-on:myevent="doSomething"
                                              :mode="'GalleryGroup'"></tisseditor>
                             </div>
                         </div>
@@ -92,11 +102,16 @@
                 error:[]
             }
         },
+
         computed: {
 
         },
 
         methods: {
+            filenames(e){
+                this.group.image=e;
+
+            },
             doSomething(e){
                 this.group.text=e;
             },

@@ -54,7 +54,8 @@
     import setting from "./setting/setting";
     import contactus from "./setting/contactus";
     import gallery from "./gallery/gallerygroup";
-
+    import gallerydetail from "./gallery/gallerydetail";
+    import feature from  "./attr/feature";
     export default {
             name: "Dashboard",
         components: {
@@ -70,7 +71,9 @@
             hashtag,
             setting,
             gallery,
-            contactus
+            contactus,
+            gallerydetail,
+            feature
         },
         data(){
             return{
@@ -189,11 +192,7 @@
                                 href: '#typebanner',
                                 title: this.$t('typebanner')
                             },
-                            {
-                                icon: 'icofont-plugin ',
-                                href: '#Attributes',
-                                title: this.$t('Attributes')
-                            },
+
                         ]
                     },
                     {
@@ -210,6 +209,23 @@
                                 icon: 'icofont-ruler-pencil-alt-1 ',
                                 href: '#post',
                                 title: this.$t('post')
+                            },
+                        ]
+                    },
+                    {
+                        href: '',
+                        title: this.$t('featureandAttributes'),
+                        icon: 'icofont-toggle-on',
+                        child: [
+                            {
+                                icon: 'icofont-verification-check',
+                                href: '#Attributes',
+                                title: this.$t('Attributes')
+                            },
+                            {
+                                icon: 'icofont-verification-check ',
+                                href: '#feature',
+                                title: this.$t('feature')
                             },
                         ]
                     },
