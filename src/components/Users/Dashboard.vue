@@ -56,6 +56,7 @@
     import gallery from "./gallery/gallerygroup";
     import gallerydetail from "./gallery/gallerydetail";
     import feature from  "./attr/feature";
+    import Attributes from "./attr/Attributes";
     export default {
             name: "Dashboard",
         components: {
@@ -73,7 +74,7 @@
             gallery,
             contactus,
             gallerydetail,
-            feature
+            feature,Attributes
         },
         data(){
             return{

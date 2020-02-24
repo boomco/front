@@ -142,6 +142,7 @@ module.exports = {
     feature : 'مشخصات',
     logo : 'لوگو',
     filter : 'فیلتر',
+    back : 'بازگشت',
     Saved : 'ذخیره سازی انجام شد',
     groupnamegallery : 'نام گروه گالری',
     The_groups_field_is_required : 'گروه را انتخاب نمایید',

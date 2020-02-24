@@ -29,7 +29,7 @@
                             <label   v-text="$t('picture')"></label>
                             <file-uploader
                                     :key="1"
-                                    mode="featureitem"
+                                    mode="AttrProductitem"
                                     v-on:filename="filenamesitem"
                                     :id='item.id'
                                     name="thump"
@@ -42,7 +42,7 @@
                                     :key="1"
                                     :text="item.help"
                                     v-on:myevent="doSomethingitem"
-                                    :mode="'featureitem'"></tisseditor>
+                                    :mode="'AttrProductitem'"></tisseditor>
                         </div>
                     </div>
                 </template>
@@ -127,7 +127,7 @@
 
                             <file-uploader
                                     :key="2"
-                                    mode="feature"
+                                    mode="Attrprodcut"
                                     v-on:filename="filenames"
                                     :id='detail.id'
                                     name="thump"
@@ -141,7 +141,7 @@
                                     :key="2"
                                     :text="detail.help"
                                     v-on:myevent="doSomething"
-                                    :mode="'feature'"></tisseditor>
+                                    :mode="'Attrprodcut'"></tisseditor>
                         </div>
                     </div>
                 </template>
@@ -160,7 +160,7 @@
     import FileUploader from "../../Custom/FileUploader";
     import showerror from "../../Custom/Showerror";
     export default {
-        name: "feature",
+        name: "Attributes",
         data() {
             return {
 
@@ -196,7 +196,7 @@
             /* Item Option */
             deleteitem(e,index){
                 let that=this;
-                this.$axios.delete(this.$url+'user/Featureitem/'+e,
+                this.$axios.delete(this.$url+'user/AttrProductitem/'+e,
                     {
                         headers:{
                             Authorization:localStorage.token
@@ -210,7 +210,7 @@
             },
             reloaddetail(){
                 let that=this;
-                this.$axios(this.$url+'user/Feature/'+this.detail.id,
+                this.$axios(this.$url+'user/Attrprodcut/'+this.detail.id,
                     {
                         headers:{
                             Authorization:localStorage.token
@@ -261,7 +261,7 @@
                 let that=this;
                 if(this.item.id==null){
 
-                    this.$axios.post(this.$url+'user/Featureitem',this.item,
+                    this.$axios.post(this.$url+'user/AttrProductitem',this.item,
                         {
                             headers:{
                                 Authorization:localStorage.token
@@ -276,7 +276,7 @@
 
                     });;
                 }else{
-                    this.$axios.put(this.$url+'user/Featureitem/'+this.item.id,this.item,
+                    this.$axios.put(this.$url+'user/AttrProductitem/'+this.item.id,this.item,
                         {
                             headers:{
                                 Authorization:localStorage.token
@@ -298,7 +298,7 @@
                 let that=this;
                 if(this.detail.id==null){
 
-                    this.$axios.post(this.$url+'user/Feature',this.detail,
+                    this.$axios.post(this.$url+'user/Attrprodcut',this.detail,
                         {
                             headers:{
                                 Authorization:localStorage.token
@@ -314,7 +314,7 @@
 
                     });;
                 }else{
-                    this.$axios.put(this.$url+'user/Feature/'+this.detail.id,this.detail,
+                    this.$axios.put(this.$url+'user/Attrprodcut/'+this.detail.id,this.detail,
                         {
                             headers:{
                                 Authorization:localStorage.token
@@ -332,7 +332,7 @@
             },
             loadlistall(){
                 let that=this;
-                this.$axios.get(this.$url+'user/Feature',{
+                this.$axios.get(this.$url+'user/Attrprodcut',{
                     headers:{
                         Authorization:localStorage.token
                     }
